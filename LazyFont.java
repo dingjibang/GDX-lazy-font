@@ -93,6 +93,8 @@ public class LazyFont extends BitmapFont {
 	public void setCurrentText(String text) {
 		if (this.currentText == null || !this.currentText.equals(text))
 			changed = true;
+		else
+			changed = false;
 		this.currentText = text;
 	}
 
@@ -115,7 +117,58 @@ public class LazyFont extends BitmapFont {
 	@Override
 	public TextBounds drawMultiLine(Batch batch, CharSequence str, float x, float y) {
 		generate(str.toString());
-		return currentFont.drawMultiLine(batch, str, x, y);
+		return currentFont.drawMultiLine(batch, str, x,y );
+	}
+	
+	/**
+	 * 是否开启英文字母智能自动换行 auto linefeed
+	 * 测试版本，如果有bug请提交！！
+	 */
+	public boolean autoLinefeed = false;
+	
+	public TextBounds drawMultiLine(Batch batch, CharSequence str, float x, float y,float width) {
+		generate(str.toString());
+		if(autoLinefeed){
+			String[] words=currentText.split(" ");
+			int currX=0;
+			int t_width=0;
+			for(int i=0;i<words.length;i++){
+				String s=words[i];
+				t_width=0;
+				char[] chars=s.toCharArray();
+				boolean nextFlag=false;
+				int tmpX=currX;
+				for(char c:chars){
+					tmpX+=getGlyphWidth(c);
+					t_width+=getGlyphWidth(c);
+					if(tmpX>width)
+						nextFlag=true;
+				}
+				if(nextFlag){
+					words[i]="\n"+s;
+					currX=0;
+				}else
+					currX=t_width;
+			}
+			StringBuilder sb=new StringBuilder();
+			for(String s:words)
+				sb.append(s+" ");
+			String str_f=sb.toString();
+			BitmapFontCache cache=currentFont.getCache();
+			cache.clear();
+			TextBounds bounds = cache.addMultiLineText(str_f, x, y, 0, HAlignment.LEFT);
+			
+			cache.draw(batch);
+			
+			return bounds;
+		}else{
+			return currentFont.drawMultiLine(batch, str, x, y);
+		}
+		
+	}
+	
+	private int getGlyphWidth(char c){
+		return getData().getGlyph(c).width;
 	}
 
 	@Override
