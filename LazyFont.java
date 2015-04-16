@@ -91,7 +91,7 @@ public class LazyFont extends BitmapFont {
 	}
 
 	public void setCurrentText(String text) {
-		if (this.currentText == null || !this.currentText.equals(text))
+		if (this.currentText == null || this.currentText.equals("") || !this.currentText.equals(text))
 			changed = true;
 		else
 			changed = false;
