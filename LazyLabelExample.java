@@ -20,6 +20,8 @@ public class Test implements ApplicationListener {
 		style=new LabelStyle();
 		style.font=new LazyFont(30, Gdx.files.internal("msyh.ttf"));
 		style.fontColor=Color.RED;
+		//开启英文自动换行(enable English auto linefeed)
+		((LazyFont)style.font).autoLinefeed=true;
 		LazyLabel l=new LazyLabel("abcde\ndeded", style);
 		l.setPosition(300, 200);
 		stage.addActor(l);
