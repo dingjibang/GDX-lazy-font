@@ -10,6 +10,12 @@ public class LazyLabel extends Label{
 
 	public LazyLabel(CharSequence text, LabelStyle style) {
 		super(text, style);
+		if(((LazyFont)style.font).isDirty()){
+			LabelStyle style2=new LabelStyle(style);
+			style2.font=new LazyFont((LazyFont) style.font);
+			((LazyFont)style.font).disposes.add((LazyFont) style2.font);
+			setStyle(style2);
+		}
 	}
 
 	public LazyLabel(CharSequence text, Skin skin, String fontName, Color color) {
@@ -40,7 +46,7 @@ public class LazyLabel extends Label{
 		BitmapFont font=getStyle().font;
 		font.setColor(color);
 		getStyle().font.getCache().setPosition(getX(), getY());
-		font.drawMultiLine(batch, getText(), getX(), getY(0)+getStyle().font.getCache().getBounds().height/2);
+		((LazyFont)font).drawMultiLine(batch, getText(), getX(), getY(0)+getStyle().font.getCache().getBounds().height/2,getWidth());
 	}
 	
 
