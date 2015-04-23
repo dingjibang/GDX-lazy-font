@@ -19,11 +19,21 @@ public class LazyFont extends BitmapFont {
 	private BitmapFont currentFont;
 	private FreeTypeFontGenerator generator;
 	private boolean changed = false, ownGenerator = true;
+	private boolean dirty = false;
+	List<LazyFont> disposes=new ArrayList<LazyFont>();
 
 	public LazyFont(int fontSize, FileHandle ttf) {
 		setFontSize(fontSize);
 		setGenerator(ttf);
 		generate(currentText);
+	}
+	
+	public boolean isDirty(){
+		return dirty;
+	}
+	
+	public LazyFont(LazyFont lazyFont){
+		this(lazyFont.getFontSize(),lazyFont.getGenerator());
 	}
 
 	public LazyFont(int fontSize, FreeTypeFontGenerator gen) {
@@ -36,6 +46,10 @@ public class LazyFont extends BitmapFont {
 		if (generator != null)
 			generator.dispose();
 		generator = new FreeTypeFontGenerator(ttf2);
+	}
+	
+	FreeTypeFontGenerator getGenerator(){
+		return generator;
 	}
 
 	private void setGenerator(FreeTypeFontGenerator gen) {
@@ -57,6 +71,7 @@ public class LazyFont extends BitmapFont {
 		setCurrentText(str);
 		if (currentText != null) {
 			if (changed) {
+				dirty=true;
 				if (currentFont != null)
 					currentFont.dispose();
 				if(generator != null){
@@ -84,6 +99,8 @@ public class LazyFont extends BitmapFont {
 		currentFont.dispose();
 		if (ownGenerator)
 			generator.dispose();
+		for(LazyFont font:disposes)
+			font.dispose();
 	}
 
 	public String getCurrentText() {
@@ -128,6 +145,7 @@ public class LazyFont extends BitmapFont {
 	
 	public TextBounds drawMultiLine(Batch batch, CharSequence str, float x, float y,float width) {
 		generate(str.toString());
+
 		if(autoLinefeed){
 			String[] words=currentText.split(" ");
 			int currX=0;
