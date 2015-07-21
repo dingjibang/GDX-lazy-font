@@ -1,6 +1,10 @@
 # GDX-LAZY-FONT
 智能且懒加载的BitmapFont模块。<br/>
 
+# STOP
+this project is stop updating :(
+请勿继续使用本项目，我已经不会继续更新本项目了。
+
 # what's this?
 You can use it to replace the Libgdx default bitmapFont class, it will be lazy generate self and needn't pre-generate by FreeTypeFontGenerator.<br/>
 Of course, you can set the font text or font size without reconstruct the bitmapFont at run time !<br/>
