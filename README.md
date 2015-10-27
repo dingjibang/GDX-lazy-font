@@ -2,7 +2,7 @@
 智能且懒加载的BitmapFont模块。<br/>
 Auto generate & manage your bitmapfont without pre-generate.
 
-[Introduce & demo in English ,click me.](#1)
+[Introduce & demo in English ,click me.](#what--how-to)
 
 # 下载地址-Download
 [点我下载最新版，click me to download last Releases](https://github.com/dingjibang/GDX-LAZY-FONT/releases/latest)
