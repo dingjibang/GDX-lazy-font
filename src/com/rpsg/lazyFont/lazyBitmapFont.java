@@ -20,19 +20,31 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
  * GDX-LAZY-FONT for LibGDX 1.5.0+<br/>
  * <b>Auto generate & manage your bitmapfont without pre-generate.</b>
  * 
- * @version 2.1.0
+ * @version 2.1.5
  * @see see https://github.com/dingjibang/GDX-LAZY-FONT
  * @author dingjibang
  *
  */
 public class LazyBitmapFont extends BitmapFont {
-
+	
 	private FreeTypeFontGenerator generator;
 	private FreeTypeBitmapFontData data;
 	private FreeTypeFontParameter parameter;
 
-	public LazyBitmapFont(FreeTypeFontGenerator gen, int fontSize) {
-		this.generator = gen;
+	private static FreeTypeFontGenerator GLOBAL_GEN = null;
+	
+	public static void setGlobalGenerator(FreeTypeFontGenerator generator){
+		GLOBAL_GEN = generator;
+	}
+	
+	public LazyBitmapFont(int fontSize){
+		this(GLOBAL_GEN,fontSize);
+	}
+	
+	public LazyBitmapFont(FreeTypeFontGenerator generator, int fontSize) {
+		if(generator == null)
+			 throw new GdxRuntimeException("lazyBitmapFont global generator must be not null to use this constructor.");
+		this.generator = generator;
 		FreeTypeFontParameter param = new FreeTypeFontParameter();
 		param.size = fontSize;
 		this.parameter = param;
@@ -41,7 +53,7 @@ public class LazyBitmapFont extends BitmapFont {
 			Field f = getClass().getSuperclass().getDeclaredField("data");
 			f.setAccessible(true);
 			f.set(this, data);
-		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -54,7 +66,7 @@ public class LazyBitmapFont extends BitmapFont {
 			Field field = generator.getClass().getDeclaredField("face");
 			field.setAccessible(true);
 			face = (Face) field.get(generator);
-		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return;
 		}
