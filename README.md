@@ -6,6 +6,10 @@ Auto generate & manage your bitmapfont without pre-generate.
 
 # 下载地址-Download
 [点我下载最新版，click me to download last Releases](https://github.com/dingjibang/GDX-LAZY-FONT/releases/)
+
+注意：1.9的libgdx在文字绘制部分的API有些小改动，如果你需要针对1.9版本的GDX，请在下载页面专门选择1.9那个版本，否则就使用他下面那个正常的版本！
+
+>>NOTICE<< GDX1.9 has some API change for render text,please notice the version on download page
 <br/>
 
 # 介绍 & 使用方法
