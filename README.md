@@ -66,7 +66,7 @@ Auto generate & manage your bitmapfont without pre-generate.
     //or change text at runtime...
     label.setText("在运行时候随便的更改下文字！");
     
-好了，就是这么简单，除了new的时候和原版不同以外，其他都是一模一样的，而且再也不用换一句文本就重新new一个了，就是这么酸爽！
+好了，就是这么简单，除了new的时候和原版不同以外，其他都是一模一样的，而且再也不用换一句文本就重新generate一下啦，就是这么酸爽！
 
 当然，最后用完了也别忘了dispose()掉哦。
 
