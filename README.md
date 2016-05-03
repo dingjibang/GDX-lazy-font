@@ -5,7 +5,7 @@ Auto generate & manage your bitmapfont without pre-generate.
 [Introduce & demo in English ,click me.](#what--how-to)
 
 # 下载地址-Download
-[点我下载最新版，click me to download last Releases](https://github.com/dingjibang/GDX-LAZY-FONT/releases/)
+[点我下载最新版，click me to download last release](https://github.com/dingjibang/GDX-LAZY-FONT/releases/)
 
 注意：1.9的libgdx在文字绘制部分的API有些小改动，如果你需要针对1.9版本的GDX，请在下载页面专门选择1.9那个版本，否则就使用他下面那个正常的版本！
 
@@ -80,7 +80,7 @@ Auto generate & manage your bitmapfont without pre-generate.
 
 ## what's this?
 
-LazyBitmapFont is a auto and self-gengrate bitmapFont extend, you can draw any text without generator. And it's helpful for no English-base language to manage BitmapFont.
+LazyBitmapFont is an auto and self-texture-gengrate bitmapFont extend, you can draw any text without generator. And it's helpful for no English-base language to manage BitmapFont.
 
 # how to use it
 
